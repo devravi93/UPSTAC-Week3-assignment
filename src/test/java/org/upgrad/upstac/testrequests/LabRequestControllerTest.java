@@ -76,16 +76,7 @@ class LabRequestControllerTest {
     }
 
     public TestRequest getTestRequestByStatus(RequestStatus status) {
-        //ArrayList<TestRequest> testRequests = getMockedList(status);
-        //when(testRequestQueryService.findBy(status)).thenReturn(testRequests);
         return testRequestQueryService.findBy(status).stream().findFirst().get();
-    }
-
-    private void setupTestData(RequestStatus status) {
-        ArrayList<TestRequest> mockedData = new ArrayList<>();
-        TestRequest testRequest = prepareMockTestRequest();
-        testRequest.setStatus(status);
-        when(testRequestQueryService.findBy(status)).thenReturn(mockedData);
     }
 
     private TestRequest prepareMockTestRequest() {
@@ -241,21 +232,4 @@ class LabRequestControllerTest {
         user.setRoles(userService.getRoleFor(UserRole.TESTER));
         return user;
     }
-
-    private ArrayList<TestRequest> getMockedList(RequestStatus status) {
-        ArrayList<TestRequest> list = new ArrayList<>();
-        TestRequest testRequest = new TestRequest();
-        testRequest.setRequestId(1L);
-        testRequest.setPinCode(4234);
-        testRequest.setPhoneNumber("423423");
-        testRequest.setName("Ravi");
-        testRequest.setGender(Gender.MALE);
-        testRequest.setEmail("ravi@ravi.com");
-        testRequest.setCreatedBy(getUser());
-        testRequest.setAddress("address");
-        testRequest.setStatus(status);
-        list.add(testRequest);
-        return list;
-    }
-
 }
